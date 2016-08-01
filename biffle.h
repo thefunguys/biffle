@@ -13,19 +13,10 @@ enum registers {
   tmp1,
   tmp2
 };
-enum ops {
-  add = 0,
-  sub,
-  mul,
-  div,
-  jmp,
-  beq,
-  bne,
-  mov,
-  dat,
-  ret,
-};
 
-typedef enum registers register_t;
+typedef enum registers bifreg_t;
 typedef enum ops operation_t;
+
+void assemble_op(char* opstr);
+void assemble_program();
 #endif
