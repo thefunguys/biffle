@@ -1,0 +1,12 @@
+set ein 48
+set zwei 48
+comp ein zwei
+bif ein .insert
+put zwei
+jump .end
+.insert
+noop
+add zwei ein
+put zwei
+.end
+hlt

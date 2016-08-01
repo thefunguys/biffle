@@ -2,6 +2,4 @@ set ein 33
 set zwei 32
 add ein zwei
 put ein
-set zwei 10
-put zwei
 hlt

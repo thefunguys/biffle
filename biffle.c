@@ -69,6 +69,8 @@ void assemble_op(char* opstr)
 	op_MULT(target1, target2);
   else if (match(opname, "div"))
 	op_DIV(target1, target2);
+  else if (match(opname, "mod"))
+	op_MOD(target1, target2);
   else if (match(opname, "comp"))
 	op_COMP(target1, target2);
   else if (match(opname, "bif"))

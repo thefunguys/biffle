@@ -1,0 +1,5 @@
+set ein 76
+set zwei 2 
+div ein zwei
+put ein
+hlt

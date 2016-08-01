@@ -12,5 +12,7 @@ void JUMP(int);
 void BIF(int, int);
 void move(int);
 void PUT(int);
+void NUM(int);
+void MOD(int, int);
 #endif
 

@@ -35,6 +35,7 @@ generic_op(DIV);
 generic_op(SET);
 generic_op(COMP);
 generic_op(BIF);
+generic_op(MOD);
 single_op(PUT);
 
 void op_JUMP(int target)

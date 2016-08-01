@@ -2,5 +2,4 @@ set ein 10
 set zwei 10
 mult ein zwei	
 put ein
-put zwei
 hlt

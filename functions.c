@@ -211,6 +211,33 @@ void PUT(int lov) {
   printf(".");
 }
 
+void MOV(int dest, int src)
+{
+  SET(dest, 0);
+  ADD(dest, src);
+}
+
+void MOD(int ad1, int ad2) {
+  MOV(res, ad1); // a
+  DIV(res, tmp2); // a / b
+  MULT(res, tmp2); // (a/b) * b
+  SUB(ad1, res);
+  /*
+set ein 76
+set zwei 11
+div ein zwei
+mult ein zwei
+set zwei 76
+sub zwei ein
+put ein
+put zwei
+  */
+}
+
+void NUM(int num) {
+}
+  
+
 void COMP(int ad1, int ad2) {
   move(tmp1);
   printf("[-]");

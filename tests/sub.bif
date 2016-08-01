@@ -1,0 +1,9 @@
+set ein 77
+set zwei 10
+sub ein zwei
+put ein
+put zwei
+set ein 180
+sub zwei ein
+put zwei
+hlt

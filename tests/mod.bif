@@ -1,0 +1,14 @@
+set ein 67
+set zwei 34
+call .mod
+noop
+put res
+hlt
+
+.mod
+set res 0
+add res ein
+div ein zwei
+mult ein zwei
+sub res ein
+ret

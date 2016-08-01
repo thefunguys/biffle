@@ -1,11 +1,10 @@
 set ein 65
 set zwei 65
-comp ein zwei
-add zwei ein
-put zwei
-comp ein zwei
-add zwei ein
-put zwei
-set ein 10
 put ein
+comp ein zwei
+add zwei ein
+put zwei
+comp ein zwei
+add zwei ein
+put zwei
 hlt
