@@ -1,5 +1,7 @@
 #ifndef BIFFLE_H
 #define BIFFLE_H
+#include <string.h>
+#include <ctype.h>
 
 enum registers {
   zero = 0,
@@ -21,4 +23,6 @@ typedef enum ops operation_t;
 
 void assemble_op(char* opstr);
 void assemble_program();
+
+char *trimwhitespace(char *str);
 #endif

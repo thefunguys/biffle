@@ -1,12 +1,15 @@
-jump 4
+jump .ab
+.start
 set ein 70
 put ein
-jump 9
+jump .end 
+.ab
 set ein 65
 set zwei 66
 put ein
 put zwei
-jump 1
+jump .start
+.end
 set ein 10
 put ein
 hlt

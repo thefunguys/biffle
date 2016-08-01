@@ -1,13 +1,30 @@
 #include <stdlib.h>
 #include <string.h>
 #include "biffle.h"
+#include "hashmap.h"
 #include "ops.h"
-#define match(s1, s2) strncmp(s1, s2, sizeof(s2) - 1) == 0
+#define match(s1, s2) strncmp(s1, s2, sizeof(s2)) == 0
+
+typedef struct label_s {
+  char label_name[256];
+  int pos;
+} label_t;
 
 FILE* fp = 0;
+map_t label_map;
 
 int arg_value(char* arg)
 {
+  trimwhitespace(arg);
+  if (arg[0] == '.') {
+	int* pos = malloc(sizeof(int) + 1);
+	*pos = 0;
+	int error = hashmap_get(label_map, arg, (void**)(&pos));
+	int ret = 0;
+	if (error == MAP_OK) ret = *pos;
+	fprintf(stderr, "got %s=%d from map\n", arg, ret);
+	return ret;
+  }
   if (match(arg, "zero"))
 	return 0;
   if (match(arg, "hlt"))
@@ -62,6 +79,12 @@ void assemble_op(char* opstr)
 	op_PUT(target1);
   else if (match(opname, "hlt"))
 	op_hlt();
+  else if (match(opname, "ret"))
+	op_RET();
+  else if (match(opname, "noop"))
+	op_NOOP();
+  else if (match(opname, "call"))
+	op_CALL(target1);
   op_idx++;
 }
 
@@ -70,19 +93,62 @@ void assemble_program()
   size_t len = 0;
   char * line = NULL;
   ssize_t read;
+  int idx = 0;
+  while ((read = getline(&line, &len, fp)) != -1) {
+	if (read == 1) continue;
+	trimwhitespace(line);
+	if (line[0] == '.') {
+	  char* lcpy = malloc(len);
+	  int* midx = malloc(sizeof(int));
+	  *midx = idx;
+	  strncpy(lcpy, line, len);
+	  fprintf(stderr, "putting %d as %s into map\n", *midx, lcpy);
+	  hashmap_put(label_map, lcpy, midx);
+	} else {
+	  idx ++;
+	}
+  }
+  rewind(fp);
   SET(hlt, 1);
   printf("[");
   while ((read = getline(&line, &len, fp)) != -1) {
+	if (read == 1) continue;
+	trimwhitespace(line);
+	fprintf(stderr, "got line=%s len=%d\n", line, (int) read);
+	if (line[0] == '.') continue;
 	assemble_op(line);
   }
   move(hlt);
   printf("]");
 }
 
+char *trimwhitespace(char *str)
+{
+  char *end;
+
+  // Trim leading space
+  while(isspace(*str)) str++;
+
+  if(*str == 0)  // All spaces?
+    return str;
+
+  // Trim trailing space
+  end = str + strlen(str) - 1;
+  while(end > str && isspace(*end)) end--;
+
+  // Write new null terminator
+  *(end+1) = 0;
+
+  return str;
+}
+
 int main(int argc, char** argv)
 {
   if (argc > 1) {
 	fp = fopen(argv[1], "r");
+  } else {
+	fp = stdin;
   }
+  label_map = hashmap_new();
   assemble_program();
 }

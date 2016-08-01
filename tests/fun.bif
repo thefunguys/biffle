@@ -1,0 +1,17 @@
+jump .start
+
+.double
+set zwei 2
+mult ein zwei
+ret
+
+.start
+set ein 33
+call .double
+noop
+put ein
+set ein 33
+put ein
+set ein 10
+put ein
+hlt

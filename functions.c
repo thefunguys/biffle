@@ -203,6 +203,7 @@ void DIV(int ad1, int ad2) {
 }
 
 void JUMP(int ad) {
+  printf("\nJUMP %d\n", ad);
   SET(pc, ad - 1);
 }
 

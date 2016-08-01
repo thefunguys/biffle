@@ -33,15 +33,41 @@ generic_op(MULT);
 generic_op(DIV);
 generic_op(SET);
 generic_op(COMP);
-single_op(JUMP);
 generic_op(BIF);
 single_op(PUT);
+
+void op_JUMP(int target)
+{
+  gen_header();
+  JUMP(target);
+  SET(sc, op_idx + 1);
+  footer();
+}
 
 void op_hlt()
 {
   gen_header();
   SET(hlt, 0);
+  SET(pc, 0);
   footer();
+}
+
+
+void op_NOOP()
+{
+  gen_header();
+  footer();
+}
+
+void op_CALL(int target)
+{
+  op_JUMP(target);
+  op_NOOP();
+}
+
+void op_RET()
+{
+  op_JUMP(sc);
 }
 void gen_header()
 {

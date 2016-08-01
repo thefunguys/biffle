@@ -2,7 +2,7 @@ testfiles=$(wildcard tests/*.bif)
 tests=$(testfiles:.bif=.b)
 
 all:
-	gcc biffle.c functions.c -o biffle
+	gcc biffle.c functions.c hashmap.c -o biffle
 
 test: 
 	./bif tests/*.bif
