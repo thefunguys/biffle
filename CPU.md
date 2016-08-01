@@ -31,4 +31,4 @@ memory layout:
 		  Useful for ending loops without changing state.
 7 = sc	  Stack counter - points to top of stack.
 8-512	  Stack.  Values are push'd and pop'd at the location of the sc.
-513+	  Heap.  
+513+	  Heap.

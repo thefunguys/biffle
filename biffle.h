@@ -11,7 +11,9 @@ enum registers {
   zwei,
   sc,
   tmp1,
-  tmp2
+  tmp2,
+  tmp3,
+  tmp4
 };
 
 typedef enum registers bifreg_t;

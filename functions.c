@@ -1,22 +1,12 @@
-void MOVE(int, int);
-void SET(int, int);
-void ADD(int, int);
-void SUB(int, int);
-void MULT(int, int);
-void DIV(int, int);
-void COMP(int, int);
-void JUMP(int);
-void BIF(int, int);
-void move(int);
-
-
+#include "functions.h"
+#include "biffle.h"
+#include "stdio.h"
 
 int position= 0;
 int stackp = 0;
 
 void MOVE(int ad1, int ad2) {
-  int temp = stackp++;
-  move(temp);
+  move(tmp1);
   printf("[-]");
   move(ad1);
   printf("[-]");
@@ -25,16 +15,16 @@ void MOVE(int ad1, int ad2) {
   printf("[");
   move(ad1);
   printf("+");
-  move(temp);
+  move(tmp1);
   printf("+");
   move(ad2);
   printf("-]");
 
-  move(temp);
+  move(tmp1);
   printf("[");
   move(ad2);
   printf("+");
-  move(temp);
+  move(tmp1);
   printf("-]");
   stackp--;
 }
@@ -50,169 +40,161 @@ void SET(int ad, int val) {
 }
 
 void ADD(int ad1, int ad2) {
-  int temp = stackp++;
-  move(temp);
+  move(tmp1);
   printf("[-]");
 
   move(ad2);
   printf("[");
   move(ad1);
   printf("+");
-  move(temp);
+  move(tmp1);
   printf("+");
   move(ad2);
   printf("-]");
 
-  move(temp);
+  move(tmp1);
   printf("[");
   move(ad2);
   printf("+");
-  move(temp);
+  move(tmp1);
   printf("-]");
   stackp-- ;
 }
 
 void SUB(int ad1, int ad2) {
-  int temp = stackp++;
-  move(temp);
+  move(tmp1);
   printf("[-]");
 
   move(ad2);
   printf("[");
   move(ad1);
   printf("-");
-  move(temp);
+  move(tmp1);
   printf("+");
   move(ad2);
   printf("-]");
 
-  move(temp);
+  move(tmp1);
   printf("[");
   move(ad2);
   printf("+");
-  move(temp);
+  move(tmp1);
   printf("-]");
   stackp-- ;
 }
 
 void MULT(int ad1, int ad2) {
-  int temp1 = stackp++;
-  int temp2 = stackp++;
-  move(temp1);
+  move(tmp1);
   printf("[-]");
-  move(temp2);
+  move(tmp2);
   printf("[-]");
 
   move(ad1);
   printf("["); {
-    move(temp2);
+    move(tmp2);
     printf("+");
     move(ad1);
     printf("-]");
   }
 
-  move(temp2);
+  move(tmp2);
   printf("["); {
     move(ad2);
     printf("["); {
       move(ad1);
       printf("+");
-      move(temp1);
+      move(tmp1);
       printf("+");
       move(ad2);
       printf("-]");
     }
-    move(temp1);
+    move(tmp1);
     printf("["); {
       move(ad2);
       printf("+");
-      move(temp1);
+      move(tmp1);
       printf("-]");
     }
-    move(temp2);
+    move(tmp2);
     printf("-]");
   }
   stackp -= 2;
 }
 
 void DIV(int ad1, int ad2) {
-  int temp1 = stackp++;
-  int temp2 = stackp++;
-  int temp3 = stackp++;
-  int temp4 = stackp++;
-  move(temp1);
+  move(tmp1);
   printf("[-]");
-  move(temp2);
+  move(tmp2);
   printf("[-]");
-  move(temp3);
+  move(tmp3);
   printf("[-]");
-  move(temp4);
+  move(tmp4);
   printf("[-]");
 
   move(ad1);
   printf("["); {
-    move(temp1);
+    move(tmp1);
     printf("+");
     move(ad1);
     printf("-]");
   }
-  move(temp1);
+  move(tmp1);
   printf("["); {
     move(ad2);
     printf("["); {
-      move(temp2);
+      move(tmp2);
       printf("+");
-      move(temp3);
+      move(tmp3);
       printf("+");
       move(ad2);
       printf("-]");
     }
-    move(temp3);
+    move(tmp3);
     printf("["); {
       move(ad2);
       printf("+");
-      move(temp3);
+      move(tmp3);
       printf("-]");
     }
-    move(temp2);
+    move(tmp2);
     printf("["); {
-      move(temp3);
+      move(tmp3);
       printf("+");
-      move(temp1);
+      move(tmp1);
       printf("-["); {
-        move(temp3);
+        move(tmp3);
         printf("[-]");
-        move(temp4);
+        move(tmp4);
         printf("+");
-        move(temp1);
+        move(tmp1);
         printf("-]");
       }
-      move(temp4);
+      move(tmp4);
       printf("["); {
-        move(temp1);
+        move(tmp1);
         printf("+");
-        move(temp4);
+        move(tmp4);
         printf("-]");
       }
-      move(temp3);
+      move(tmp3);
       printf("["); {
-        move(temp2);
+        move(tmp2);
         printf("-["); {
           move(ad1);
           printf("-");
-          move(temp2);
+          move(tmp2);
           printf("[-]]");
         }
         printf("+");
-        move(temp3);
+        move(tmp3);
         printf("-]");
       }
-      move(temp2);
+      move(tmp2);
       printf("-]");
     }
     move(ad1);
     printf("+");
-    move(temp1);
+    move(tmp1);
     printf("]");
   }
 
@@ -221,17 +203,20 @@ void DIV(int ad1, int ad2) {
 
 void JUMP(int ad) {}
 
+void PUT(int lov) {
+  move(lov);
+  printf(".");
+}
+
 void COMP(int ad1, int ad2) {
-  int temp1 = stackp++;
-  int temp2 = stackp++;
-  move(temp1);
+  move(tmp1);
   printf("[-]");
-  move(temp2);
+  move(tmp2);
   printf("[-]");
 
   move(ad1);
   printf("["); {
-    move(temp2);
+    move(tmp2);
     printf("+");
     move(ad1);
     printf("-]+");
@@ -239,27 +224,27 @@ void COMP(int ad1, int ad2) {
 
   move(ad2);
   printf("["); {
-    move(temp2);
+    move(tmp2);
     printf("-");
-    move(temp1);
+    move(tmp1);
     printf("+");
     move(ad2);
     printf("-]");
   }
 
-  move(temp1);
+  move(tmp1);
   printf("["); {
     move(ad2);
     printf("+");
-    move(temp1);
+    move(tmp1);
     printf("-]");
   }
 
-  move(temp2);
+  move(tmp2);
   printf("["); {
     move(ad1);
     printf("-");
-    move(temp2);
+    move(tmp2);
     printf("[-]]");
   }
 
@@ -267,35 +252,33 @@ void COMP(int ad1, int ad2) {
 }
 
 void BIF(int ad, int jmp) {
-  int temp1 = stackp++;
-  int temp2 = stackp++;
-  move(temp1);
+  move(tmp1);
   printf("[-]");
-  move(temp2);
+  move(tmp2);
   printf("[-]");
 
   move(ad);
   printf("["); {
-    move(temp1);
+    move(tmp1);
     printf("+");
-    move(temp2);
+    move(tmp2);
     printf("+");
     move(ad);
     printf("-]");
   }
 
-  move(temp1);
+  move(tmp1);
   printf("["); {
     move(ad);
     printf("+");
-    move(temp1);
+    move(tmp1);
     printf("-]");
   }
 
-  move(temp2);
+  move(tmp2);
   printf("["); {
-    jump(jmp);
-    move(temp2);
+    JUMP(jmp);
+    move(tmp2);
     printf("[-]]");
   }
 

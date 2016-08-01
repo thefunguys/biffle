@@ -1,15 +1,18 @@
 #ifndef BIFFLE_OPS_H
 #define BIFFLE_OPS_H
 #include <stdio.h>
+#include "functions.h"
 #define generic_op(op) void op_##op(int target1, int target2) {\
+	printf("\n%s %d %d\n", #op, target1, target2);\
 	gen_header();\
-	bif_##op(target1, target2);\
+	op(target1, target2);\
 	footer();\
   }
 
 #define single_op(op) void op_##op(int target) {\
+	printf("\n%s %d\n", #op, target);\
 	gen_header();\
-	bif_##op(target);\
+	op(target);\
 	footer();\
 }
 
@@ -23,41 +26,35 @@ void gen_header();
 
 void footer();
   
-dummy(move);
-generic_op(move);
-dummy(add);
-generic_op(add);
-dummy(sub);
-generic_op(sub);
-dummy(mult);
-generic_op(mult);
-dummy(div);
-generic_op(div);
-dummy(set);
-generic_op(set);
-dummy(comp);
-generic_op(comp);
-dummy(jmp);
-generic_op(jmp);
-dummy(bif);
-generic_op(bif);
+single_op(move);
+generic_op(ADD);
+generic_op(SUB);
+generic_op(MULT);
+generic_op(DIV);
+generic_op(SET);
+generic_op(COMP);
+single_op(JUMP);
+generic_op(BIF);
+single_op(PUT);
 
 void op_hlt()
 {
   gen_header();
-  bif_set(hlt, 0);
+  SET(hlt, 0);
   footer();
 }
 void gen_header()
 {
-  bif_set(tmp1, op_idx);
-  bif_comp(tmp1, pc);
+  SET(tmp3, op_idx);
+  COMP(tmp3, pc);
+  move(tmp3);
   printf("[");
 }
 void footer()
 {
-  bif_add(pc, 1);
-  bif_move(zero, 0);
+  move(pc);
+  printf("+");
+  move(zero);
   printf("]\n");
 }
 #endif

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while [ "$1" != "" ]; do
+	FILE=$1
+	OUTFILE=`echo $FILE | sed -e 's/\.bif/\.b/g'`
+	./biffle $FILE > $OUTFILE
+	shift
+done;

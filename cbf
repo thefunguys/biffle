@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while [ "$1" != "" ]; do
+	FILE=$1
+	echo "$FILE: "
+	langy $FILE
+	shift
+done;
