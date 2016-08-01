@@ -1,17 +1,29 @@
 jump .start
 
-.double
-set zwei 2
-mult ein zwei
-ret
-
 .start
 set ein 33
 call .double
 noop
 put ein
-set ein 33
+set ein 34
+call .double
+noop
+put ein
+set ein 10
+call .square
+noop
 put ein
 set ein 10
 put ein
 hlt
+
+.double
+set zwei 2
+mult ein zwei
+ret
+
+.square
+set zwei 0
+add zwei ein
+mult ein zwei
+ret

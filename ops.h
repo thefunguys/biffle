@@ -21,6 +21,7 @@
   }
 
 static int op_idx = 0;
+int ret_pos = 0;
 
 void gen_header();
 
@@ -40,7 +41,6 @@ void op_JUMP(int target)
 {
   gen_header();
   JUMP(target);
-  SET(sc, op_idx + 1);
   footer();
 }
 
@@ -61,13 +61,18 @@ void op_NOOP()
 
 void op_CALL(int target)
 {
-  op_JUMP(target);
-  op_NOOP();
+  gen_header();
+  JUMP(target);
+  SET(sc, op_idx + 1);
+  footer();
 }
 
 void op_RET()
 {
-  op_JUMP(sc);
+  gen_header();
+  SET(pc, 0);
+  ADD(pc, sc);
+  footer();
 }
 void gen_header()
 {

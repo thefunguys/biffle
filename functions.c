@@ -2,7 +2,7 @@
 #include "biffle.h"
 #include "stdio.h"
 
-int position= 0;
+static int position= 0;
 int stackp = 0;
 
 void MOVE(int ad1, int ad2) {
@@ -30,7 +30,6 @@ void MOVE(int ad1, int ad2) {
 }
 
 void SET(int ad, int val) {
-  printf("\nSET %d %d\n", ad, val);
   move(ad);
   printf("[-]");
   char addc = '+';
@@ -213,7 +212,6 @@ void PUT(int lov) {
 }
 
 void COMP(int ad1, int ad2) {
-  printf("\nCOMP %d %d\n", ad1, ad2);
   move(tmp1);
   printf("[-]");
   move(tmp2);
@@ -293,8 +291,6 @@ void BIF(int ad, int jmp) {
 }
 
 void move(int ad) {
-  if (ad == 2)
-	printf("\nMOVE to PC\n");
   int num = ad - position;
   char movc = '>';
   if(num == 0) return;

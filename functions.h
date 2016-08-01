@@ -1,5 +1,6 @@
 #ifndef BIF_FUNCTIONS_H
 #define BIF_FUNCTIONS_H
+static int position;
 void MOVE(int, int);
 void SET(int, int);
 void ADD(int, int);
