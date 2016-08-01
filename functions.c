@@ -30,6 +30,7 @@ void MOVE(int ad1, int ad2) {
 }
 
 void SET(int ad, int val) {
+  printf("\nSET %d %d\n", ad, val);
   move(ad);
   printf("[-]");
   char addc = '+';
@@ -201,7 +202,9 @@ void DIV(int ad1, int ad2) {
   stackp -= 4;
 }
 
-void JUMP(int ad) {}
+void JUMP(int ad) {
+  SET(pc, ad - 1);
+}
 
 void PUT(int lov) {
   move(lov);
@@ -209,6 +212,7 @@ void PUT(int lov) {
 }
 
 void COMP(int ad1, int ad2) {
+  printf("\nCOMP %d %d\n", ad1, ad2);
   move(tmp1);
   printf("[-]");
   move(tmp2);
@@ -247,6 +251,7 @@ void COMP(int ad1, int ad2) {
     move(tmp2);
     printf("[-]]");
   }
+  move(ad1);
 
   stackp -= 2;
 }
@@ -287,6 +292,8 @@ void BIF(int ad, int jmp) {
 }
 
 void move(int ad) {
+  if (ad == 2)
+	printf("\nMOVE to PC\n");
   int num = ad - position;
   char movc = '>';
   if(num == 0) return;

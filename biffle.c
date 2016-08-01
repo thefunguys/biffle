@@ -67,15 +67,15 @@ void assemble_op(char* opstr)
 
 void assemble_program()
 {
-  char line[1024] = {0};
+  size_t len = 0;
+  char * line = NULL;
+  ssize_t read;
   SET(hlt, 1);
   printf("[");
-  while (1) {
-	fgets(line, sizeof(line), fp);
-	if (strcmp(line, "\n") == 0)
-	  break;
+  while ((read = getline(&line, &len, fp)) != -1) {
 	assemble_op(line);
   }
+  move(hlt);
   printf("]");
 }
 

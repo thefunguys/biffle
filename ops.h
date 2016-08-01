@@ -46,15 +46,20 @@ void op_hlt()
 void gen_header()
 {
   SET(tmp3, op_idx);
-  COMP(tmp3, pc);
+  SET(tmp4, 0);
+  ADD(tmp4, pc);
+  COMP(tmp3, tmp4);
+  move(pc);
+  printf("#");
   move(tmp3);
-  printf("[");
+  printf("#[");
 }
 void footer()
 {
   move(pc);
   printf("+");
-  move(zero);
+  move(tmp3);
+  SET(tmp3, 0);
   printf("]\n");
 }
 #endif
