@@ -1,0 +1,44 @@
+;123
+set ein 123
+;ones
+set 15 0
+;tens
+set 16 0
+;hundreds
+set 17 0
+set 20 10
+.loop
+mov tmp7 15
+comp tmp7 20
+bif tmp7 .inc10s
+jump .end
+.inc10s
+inc 16
+set 15 0
+mov tmp7 16
+comp tmp7 20
+bif tmp7 .inc100s
+jump .end
+.inc100s
+inc 17
+set 16 0
+.end
+dec ein
+inc 15
+bif ein .loop
+mov jcmp 17
+call .pdigit
+noop
+mov jcmp 16
+call .pdigit
+noop
+mov jcmp 15
+call .pdigit
+noop
+hlt
+
+.pdigit
+set res 48
+add res jcmp
+put res
+ret

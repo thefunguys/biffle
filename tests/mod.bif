@@ -1,3 +1,4 @@
+;!
 set ein 67
 set zwei 34
 call .mod

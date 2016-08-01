@@ -1,0 +1,5 @@
+;A
+set ein 65
+mov zwei ein
+put zwei
+hlt

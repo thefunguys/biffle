@@ -39,6 +39,18 @@ void SET(int ad, int val) {
   for(int i=0; i < val; i++) printf("%c", addc);
 }
 
+void INC(int dest)
+{
+  move(dest);
+  printf("+");
+}
+
+void DEC(int dest)
+{
+  move(dest);
+  printf("-");
+}
+
 void ADD(int ad1, int ad2) {
   move(tmp1);
   printf("[-]");

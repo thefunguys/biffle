@@ -45,6 +45,18 @@ int arg_value(char* arg)
 	return 8;
   if (match(arg, "tmp2"))
 	return 9;
+  if (match(arg, "tmp3"))
+	return 10;
+  if (match(arg, "tmp4"))
+	return 11;
+  if (match(arg, "tmp5"))
+	return 12;
+  if (match(arg, "tmp6"))
+	return 13;
+  if (match(arg, "tmp7"))
+	return 14;
+  if (match(arg, "tmp8"))
+	return 15;
   return atoi(arg);
 }
 
@@ -71,6 +83,8 @@ void assemble_op(char* opstr)
 	op_DIV(target1, target2);
   else if (match(opname, "mod"))
 	op_MOD(target1, target2);
+  else if (match(opname, "mov"))
+	op_MOV(target1, target2);
   else if (match(opname, "comp"))
 	op_COMP(target1, target2);
   else if (match(opname, "bif"))
@@ -79,6 +93,10 @@ void assemble_op(char* opstr)
 	op_JUMP(target1);
   else if (match(opname, "put"))
 	op_PUT(target1);
+  else if (match(opname, "inc"))
+	op_INC(target1);
+  else if (match(opname, "dec"))
+	op_DEC(target1);
   else if (match(opname, "hlt"))
 	op_hlt();
   else if (match(opname, "ret"))
@@ -99,6 +117,7 @@ void assemble_program()
   while ((read = getline(&line, &len, fp)) != -1) {
 	if (read == 1) continue;
 	trimwhitespace(line);
+	if (line[0] == ';') continue;
 	if (line[0] == '.') {
 	  char* lcpy = malloc(len);
 	  int* midx = malloc(sizeof(int));
@@ -116,6 +135,7 @@ void assemble_program()
   while ((read = getline(&line, &len, fp)) != -1) {
 	if (read == 1) continue;
 	trimwhitespace(line);
+	if (line[0] == ';') continue;
 	fprintf(stderr, "got line=%s len=%d\n", line, (int) read);
 	if (line[0] == '.') continue;
 	assemble_op(line);

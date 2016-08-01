@@ -3,6 +3,7 @@
 while [ "$1" != "" ]; do
 	FILE=$1
 	echo "$FILE: "
+	head -n 1 `echo $FILE | sed -e 's/\.b/\.bif/'`
 	langy $FILE
 	echo ""
 	shift

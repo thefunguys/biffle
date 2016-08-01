@@ -4,6 +4,7 @@ static int position;
 void MOVE(int, int);
 void SET(int, int);
 void ADD(int, int);
+void INC(int);
 void SUB(int, int);
 void MULT(int, int);
 void DIV(int, int);
@@ -14,5 +15,7 @@ void move(int);
 void PUT(int);
 void NUM(int);
 void MOD(int, int);
+void MOV(int, int);
+void DEC(int);
 #endif
 

@@ -1,4 +1,5 @@
-set ein 76
+;A
+set ein 131
 set zwei 2 
 div ein zwei
 put ein

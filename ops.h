@@ -36,7 +36,10 @@ generic_op(SET);
 generic_op(COMP);
 generic_op(BIF);
 generic_op(MOD);
+generic_op(MOV);
 single_op(PUT);
+single_op(INC);
+single_op(DEC);
 
 void op_JUMP(int target)
 {

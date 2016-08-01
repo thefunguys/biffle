@@ -1,6 +1,4 @@
-jump .start
-
-.start
+;BDd
 set ein 33
 call .double
 noop
