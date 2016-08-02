@@ -1,8 +1,8 @@
-*an instruction set and execution environment, entirely in brainfuck
+biffle is an instruction set and execution environment, entirely in brainfuck
 
 RUNNING
-rename 'langy' in cbf to your brainfuck interpreter of choice
-use `make test` to run the test/example suite
+ - rename 'langy' in cbf to your brainfuck interpreter of choice
+ - use `make test` to run the test/example suite
 
 WHAT IT HAS
  - many common operations (add, sub, mul, div)
@@ -10,5 +10,5 @@ WHAT IT HAS
  - a stack
 
 WHAT IT LACKS
- - True random-access memory
+ - True random-access memory (to be engineered, dirtily)
  - A higher level language for it (yet)

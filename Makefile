@@ -1,14 +1,22 @@
-testfiles=$(wildcard tests/*.bif)
-tests=$(testfiles:.bif=.b)
+CC = gcc
+CFLAGS = -Wall -O1
+SOURCES = biffle.c functions.c hashmap.c
 
-all:
-	gcc biffle.c functions.c hashmap.c -o biffle
 
-test: 
+EXE = biffle
+SRCDIR = .
+OBJDIR = build
+OBJECTS = $(SOURCES:%.c=$(OBJDIR)/%.o)
+
+$(EXE): $(OBJECTS)
+	$(CC) -o $@ $(OBJECTS) $(CFLAGS)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) -c $(CFLAGS) $< -o $@ 
+
+test: $(EXE) 
 	./bif tests/*.bif
 	./cbf tests/*.b
 
 clean:
-	rm tests/*.b
-	rm *.b
-
+	rm build/*.o
