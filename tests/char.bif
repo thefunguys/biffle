@@ -1,0 +1,12 @@
+;Hello
+set 20 'H'
+set 21 'e'
+set 22 'l'
+set 23 'l'
+set 24 'o'
+put 20
+put 21
+put 22
+put 23
+put 24
+hlt

@@ -1,0 +1,7 @@
+;DB
+set ein 65
+addi ein 3
+put ein
+subi ein 2
+put ein
+hlt

@@ -1,0 +1,10 @@
+set ein 58
+.loop
+set zwei 48
+put ein
+comp zwei ein
+dec ein
+bif zwei .end
+jump .loop
+.end
+hlt

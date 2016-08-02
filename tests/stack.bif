@@ -1,0 +1,18 @@
+set ein 75
+push ein
+set ein 79
+push ein
+set ein 79
+push ein
+set ein 76
+push ein
+pop zwei
+put zwei
+pop zwei
+put zwei
+pop zwei
+put zwei
+pop zwei
+put zwei
+
+hlt

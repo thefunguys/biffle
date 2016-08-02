@@ -16,6 +16,12 @@ void PUT(int);
 void NUM(int);
 void MOD(int, int);
 void MOV(int, int);
+void ADDI(int, int);
+void SUBI(int, int);
 void DEC(int);
+void PRINTN(int);
+void GETC(int);
+void PUSH(int);
+void POP(int);
 #endif
 

@@ -22,41 +22,46 @@ int arg_value(char* arg)
 	int error = hashmap_get(label_map, arg, (void**)(&pos));
 	int ret = 0;
 	if (error == MAP_OK) ret = *pos;
-	fprintf(stderr, "got %s=%d from map\n", arg, ret);
 	return ret;
   }
+  if (arg[0] == '\'')
+	return (int) arg[1];
+  if (arg[0] == '%')
+	return 30 + atoi(arg++);
   if (match(arg, "zero"))
-	return 0;
+	return zero;
   if (match(arg, "hlt"))
-	return 1;
+	return hlt;
   if (match(arg, "pc"))
-	return 2;
+	return pc;
   if (match(arg, "jcmp"))
-	return 3;
+	return jcmp;
   if (match(arg, "res"))
-	return 4;
+	return res;
   if (match(arg, "ein"))
-	return 5;
+	return ein;
   if (match(arg, "zwei"))
-	return 6;
+	return zwei;
   if (match(arg, "sc"))
-	return 7;
+	return sc;
+  if (match(arg, "sp"))
+	return sp;
   if (match(arg, "tmp1"))
-	return 8;
+	return tmp1;
   if (match(arg, "tmp2"))
-	return 9;
+	return tmp2;
   if (match(arg, "tmp3"))
-	return 10;
+	return tmp3;
   if (match(arg, "tmp4"))
-	return 11;
+	return tmp4;
   if (match(arg, "tmp5"))
-	return 12;
+	return tmp5;
   if (match(arg, "tmp6"))
-	return 13;
+	return tmp6;
   if (match(arg, "tmp7"))
-	return 14;
+	return tmp7;
   if (match(arg, "tmp8"))
-	return 15;
+	return tmp8;
   return atoi(arg);
 }
 
@@ -75,6 +80,10 @@ void assemble_op(char* opstr)
 	op_ADD(target1, target2);
   else if (match(opname, "sub"))
 	op_SUB(target1, target2);
+  else if (match(opname, "addi"))
+	op_ADDI(target1, target2);
+  else if (match(opname, "subi"))
+	op_SUBI(target1, target2);
   else if (match(opname, "set"))
 	op_SET(target1, target2);
   else if (match(opname, "mult"))
@@ -83,6 +92,8 @@ void assemble_op(char* opstr)
 	op_DIV(target1, target2);
   else if (match(opname, "mod"))
 	op_MOD(target1, target2);
+  else if (match(opname, "getc"))
+	op_GETC(target1);
   else if (match(opname, "mov"))
 	op_MOV(target1, target2);
   else if (match(opname, "comp"))
@@ -105,6 +116,10 @@ void assemble_op(char* opstr)
 	op_NOOP();
   else if (match(opname, "call"))
 	op_CALL(target1);
+  else if (match(opname, "push"))
+	op_PUSH(target1);
+  else if (match(opname, "pop"))
+	op_POP(target1);
   op_idx++;
 }
 
@@ -123,7 +138,6 @@ void assemble_program()
 	  int* midx = malloc(sizeof(int));
 	  *midx = idx;
 	  strncpy(lcpy, line, len);
-	  fprintf(stderr, "putting %d as %s into map\n", *midx, lcpy);
 	  hashmap_put(label_map, lcpy, midx);
 	} else {
 	  idx ++;
@@ -136,7 +150,6 @@ void assemble_program()
 	if (read == 1) continue;
 	trimwhitespace(line);
 	if (line[0] == ';') continue;
-	fprintf(stderr, "got line=%s len=%d\n", line, (int) read);
 	if (line[0] == '.') continue;
 	assemble_op(line);
   }

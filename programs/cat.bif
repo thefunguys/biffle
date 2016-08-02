@@ -1,0 +1,8 @@
+set 20 1
+getc 20
+.loop
+put 20
+getc 20
+bif 20 .loop
+.end
+hlt

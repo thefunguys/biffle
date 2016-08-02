@@ -12,10 +12,15 @@ enum registers {
   ein,
   zwei,
   sc,
+  sp,
   tmp1,
   tmp2,
   tmp3,
-  tmp4
+  tmp4,
+  tmp5,
+  tmp6,
+  tmp7,
+  tmp8
 };
 
 typedef enum registers bifreg_t;

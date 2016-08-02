@@ -3,14 +3,12 @@
 #include <stdio.h>
 #include "functions.h"
 #define generic_op(op) void op_##op(int target1, int target2) {\
-	printf("\n%s %d %d\n", #op, target1, target2);\
 	gen_header();\
 	op(target1, target2);\
 	footer();\
   }
 
 #define single_op(op) void op_##op(int target) {\
-	printf("\n%s %d\n", #op, target);\
 	gen_header();\
 	op(target);\
 	footer();\
@@ -37,7 +35,12 @@ generic_op(COMP);
 generic_op(BIF);
 generic_op(MOD);
 generic_op(MOV);
+generic_op(ADDI);
+generic_op(SUBI);
+single_op(PUSH);
+single_op(POP);
 single_op(PUT);
+single_op(GETC);
 single_op(INC);
 single_op(DEC);
 
@@ -84,10 +87,8 @@ void gen_header()
   SET(tmp4, 0);
   ADD(tmp4, pc);
   COMP(tmp3, tmp4);
-  move(pc);
-  printf("#");
   move(tmp3);
-  printf("#[");
+  printf("[");
 }
 void footer()
 {

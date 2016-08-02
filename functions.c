@@ -39,16 +39,104 @@ void SET(int ad, int val) {
   for(int i=0; i < val; i++) printf("%c", addc);
 }
 
-void INC(int dest)
+void GETC(int dest)
 {
   move(dest);
-  printf("+");
+  printf(",");
+}
+
+void ADDI(int dest, int n)
+{
+  move(dest);
+  int i;
+  for (i = 0; i < n; i++)
+	printf("+");
+}
+
+void SUBI(int dest, int n)
+{
+  move(dest);
+  int i;
+  for (i = 0; i < n; i++)
+	printf("-");
+}
+
+void INC(int dest)
+{
+  ADDI(dest, 1);
 }
 
 void DEC(int dest)
 {
-  move(dest);
-  printf("-");
+  SUBI(dest, 1);
+}
+
+void PUSH(int dest)
+{
+  MOV(29, dest);
+  SET(30, 0);
+  SET(32, 1);
+  SET(34, 1);
+  move(30);
+  printf("<[->>>[>>]>+<<<[<<]<]>>>[>>]+[<<]");
+}
+
+void POP(int dest)
+{
+  SET(29, 0);
+  SET(30, 0);
+  printf(">>[>>]<[-<[<<]<+>>>[>>]<]<-<<[<<]");
+  MOV(dest, 29);
+}
+
+
+void PRINTN(int n)
+{
+  /**
+set ein 123
+;ones
+set 15 0
+;tens
+set 16 0
+;hundreds
+set 17 0
+set 20 10
+.loop
+mov tmp7 15
+comp tmp7 20
+bif tmp7 .inc10s
+jump .end
+.inc10s
+inc 16
+set 15 0
+mov tmp7 16
+comp tmp7 20
+bif tmp7 .inc100s
+jump .end
+.inc100s
+inc 17
+set 16 0
+.end
+dec ein
+inc 15
+bif ein .loop
+mov jcmp 17
+call .pdigit
+noop
+mov jcmp 16
+call .pdigit
+noop
+mov jcmp 15
+call .pdigit
+noop
+hlt
+
+.pdigit
+set res 48
+add res jcmp
+put res
+ret
+  */
 }
 
 void ADD(int ad1, int ad2) {
@@ -214,7 +302,6 @@ void DIV(int ad1, int ad2) {
 }
 
 void JUMP(int ad) {
-  printf("\nJUMP %d\n", ad);
   SET(pc, ad - 1);
 }
 
