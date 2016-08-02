@@ -20,6 +20,7 @@ void ADDI(int, int);
 void SUBI(int, int);
 void DEC(int);
 void PRINTN(int);
+void PRINT(char*);
 void GETC(int);
 void PUSH(int);
 void POP(int);

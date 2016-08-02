@@ -1,0 +1,28 @@
+;Y7"
+set ein 1
+set zwei 1
+set tmp8 9
+push ein
+push zwei
+
+.loop
+; get last two numbers
+pop ein
+pop zwei
+; restore values to stack
+push zwei
+push ein
+; fib it up
+add ein zwei
+push ein
+dec tmp8
+; stop after 9 times
+bif tmp8 .loop
+; print 3 largest values - correspond to 89, 55, 34(, 21, 13, 8, 5, 3, 2, 1, 1)
+pop ein
+put ein
+pop ein
+put ein
+pop ein
+put ein
+hlt

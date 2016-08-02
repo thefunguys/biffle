@@ -89,7 +89,6 @@ void assemble_op(char* opstr)
   else if (match(opname, "subi"))
 	op_SUBI(target1, target2);
   else if (match(opname, "print")) {
-	fprintf(stderr, "\n%s\n", opstr);
 	op_PRINT(opcpy + 6);
   }
   else if (match(opname, "set"))

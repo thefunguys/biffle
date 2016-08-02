@@ -43,6 +43,12 @@ single_op(PUT);
 single_op(GETC);
 single_op(INC);
 single_op(DEC);
+void op_PRINT(char* str)
+{
+  gen_header();
+  PRINT(str);
+  footer();
+}
 
 void op_JUMP(int target)
 {

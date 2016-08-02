@@ -6,13 +6,9 @@ set ein 79
 push ein
 set ein 76
 push ein
-pop zwei
-put zwei
-pop zwei
-put zwei
-pop zwei
-put zwei
-pop zwei
-put zwei
+.loop
+pop ein
+put ein
+bif ein .loop
 
 hlt

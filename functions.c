@@ -76,17 +76,30 @@ void PUSH(int dest)
   MOV(29, dest);
   SET(30, 0);
   SET(32, 1);
-  SET(34, 1);
   move(30);
   printf("<[->>>[>>]>+<<<[<<]<]>>>[>>]+[<<]");
+  SET(32, 1);
 }
 
 void POP(int dest)
 {
   SET(29, 0);
+  SET(32, 1);
   SET(30, 0);
   printf(">>[>>]<[-<[<<]<+>>>[>>]<]<-<<[<<]");
+  SET(32, 1);
   MOV(dest, 29);
+}
+
+void PRINT(char* str)
+{
+  int i = 0;
+  size_t len = strlen(str);
+  while(i < strlen(str)) {
+	SET(tmp5, (int) str[i]);
+	PUT(tmp5);
+	i++;
+  }
 }
 
 
