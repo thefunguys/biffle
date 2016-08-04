@@ -1,0 +1,18 @@
+;0123456789
+set tmp8 1
+set tmp7 '9'
+set ein '/'
+.loop
+inc ein
+store ein tmp8
+inc tmp8
+mov zwei ein
+cne zwei tmp7
+bif zwei .loop
+set tmp8 1
+.loop2
+load ein tmp8
+inc tmp8
+put ein
+bif ein .loop2
+hlt

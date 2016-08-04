@@ -1,10 +1,18 @@
 #!/bin/bash
+default="\e[39m"
 
 while [ "$1" != "" ]; do
+	color="\e[91m"
 	FILE=$1
 	echo "$FILE: "
-	head -n 1 `echo $FILE | sed -e 's/\.b/\.bif/'`
-	langy $FILE
-	echo ""
+	expected=$(head -n 1 `echo $FILE | sed -e 's/\.b/\.bif/'`)
+	expected=$(echo -e "$expected" | sed -e 's/^;//')
+	output=$(langy $FILE)
+	if [ "$expected" = "$output" ]; then
+		color="\e[92m"
+	else
+		echo "expected $expected"
+	fi
+	echo -e "$color$output$default"
 	shift
 done;

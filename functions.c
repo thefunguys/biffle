@@ -5,38 +5,78 @@
 static int position= 0;
 int stackp = 0;
 
+void cell_add(int n)
+{
+  int i;
+  for (i = 0; i < n; ++i)
+	putchar('+');
+}
+void cell_sub(int n)
+{
+  int i;
+  for (i = 0; i < n; ++i)
+	putchar('-');
+}
+
+void cell_move_r(int n)
+{
+  int i;
+  for (i = 0; i < n; ++i)
+	putchar('>');
+}
+
+void cell_move_l(int n)
+{
+  int i;
+  for (i = 0; i < n; ++i)
+	putchar('<');
+}
+
+void cell_while()
+{
+  putchar('[');
+}
+
+void cell_end()
+{
+  putchar(']');
+}
+
+void cell_zero()
+{
+  printf("[-]");
+}
+
 void MOVE(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(ad1);
-  printf("[-]");
+  cell_zero();
 
   move(ad2);
-  printf("[");
+  cell_while();
   move(ad1);
-  printf("+");
+  cell_add(1);
   move(tmp1);
-  printf("+");
+  cell_add(1);
   move(ad2);
-  printf("-]");
+  cell_sub(1);
+cell_end();
 
   move(tmp1);
-  printf("[");
+  cell_while();
   move(ad2);
-  printf("+");
+  cell_add(1);
   move(tmp1);
-  printf("-]");
+  cell_sub(1);
+cell_end();
   stackp--;
 }
 
 void SET(int ad, int val) {
   move(ad);
-  printf("[-]");
-  char addc = '+';
-  if( val == 0) return;
-  else if(val < 0) addc = '-';
-
-  for(int i=0; i < val; i++) printf("%c", addc);
+  cell_zero();
+  cell_add(val);
 }
 
 void GETC(int dest)
@@ -48,17 +88,13 @@ void GETC(int dest)
 void ADDI(int dest, int n)
 {
   move(dest);
-  int i;
-  for (i = 0; i < n; i++)
-	printf("+");
+  cell_add(n);
 }
 
 void SUBI(int dest, int n)
 {
   move(dest);
-  int i;
-  for (i = 0; i < n; i++)
-	printf("-");
+  cell_sub(n);
 }
 
 void INC(int dest)
@@ -154,143 +190,156 @@ ret
 
 void ADD(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
 
   move(ad2);
-  printf("[");
+  cell_while();
   move(ad1);
-  printf("+");
+  cell_add(1);
   move(tmp1);
-  printf("+");
+  cell_add(1);
   move(ad2);
-  printf("-]");
+  cell_sub(1);
+  cell_end();
 
   move(tmp1);
-  printf("[");
+  cell_while();
   move(ad2);
-  printf("+");
+  cell_add(1);
   move(tmp1);
-  printf("-]");
+  cell_sub(1);
+  cell_end();
   stackp-- ;
 }
 
 void SUB(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
 
   move(ad2);
-  printf("[");
+  cell_while();
   move(ad1);
   printf("-");
   move(tmp1);
-  printf("+");
+  cell_add(1);
   move(ad2);
-  printf("-]");
+  cell_sub(1);
+  cell_end();
 
   move(tmp1);
-  printf("[");
+  cell_while();
   move(ad2);
-  printf("+");
+  cell_add(1);
   move(tmp1);
-  printf("-]");
+  cell_sub(1);
+  cell_end();
   stackp-- ;
 }
 
 void MULT(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(tmp2);
-  printf("[-]");
+  cell_zero();
 
   move(ad1);
-  printf("["); {
+  cell_while(); {
     move(tmp2);
-    printf("+");
+    cell_add(1);
     move(ad1);
-    printf("-]");
+    cell_sub(1);
+	cell_end();
   }
 
   move(tmp2);
-  printf("["); {
+  cell_while(); {
     move(ad2);
-    printf("["); {
+    cell_while(); {
       move(ad1);
-      printf("+");
+      cell_add(1);
       move(tmp1);
-      printf("+");
+      cell_add(1);
       move(ad2);
-      printf("-]");
+      cell_sub(1);
+	  cell_end();
     }
     move(tmp1);
-    printf("["); {
+    cell_while(); {
       move(ad2);
-      printf("+");
+      cell_add(1);
       move(tmp1);
-      printf("-]");
+      cell_sub(1);
+	  cell_end();
     }
     move(tmp2);
-    printf("-]");
+    cell_sub(1);
+	cell_end();
   }
   stackp -= 2;
 }
 
 void DIV(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(tmp2);
-  printf("[-]");
+  cell_zero();
   move(tmp3);
-  printf("[-]");
+  cell_zero();
   move(tmp4);
-  printf("[-]");
+  cell_zero();
 
   move(ad1);
-  printf("["); {
+  cell_while(); {
     move(tmp1);
-    printf("+");
+    cell_add(1);
     move(ad1);
-    printf("-]");
+    cell_sub(1);
+	cell_end();
   }
   move(tmp1);
-  printf("["); {
+  cell_while(); {
     move(ad2);
-    printf("["); {
+    cell_while(); {
       move(tmp2);
-      printf("+");
+      cell_add(1);
       move(tmp3);
-      printf("+");
+      cell_add(1);
       move(ad2);
-      printf("-]");
+      cell_sub(1);
+	  cell_end();
     }
     move(tmp3);
-    printf("["); {
+    cell_while(); {
       move(ad2);
-      printf("+");
+      cell_add(1);
       move(tmp3);
-      printf("-]");
+      cell_sub(1);
+	  cell_end();
     }
     move(tmp2);
-    printf("["); {
+    cell_while(); {
       move(tmp3);
-      printf("+");
+      cell_add(1);
       move(tmp1);
       printf("-["); {
         move(tmp3);
-        printf("[-]");
+        cell_zero();
         move(tmp4);
-        printf("+");
+        cell_add(1);
         move(tmp1);
-        printf("-]");
+        cell_sub(1);
+		cell_end();
       }
       move(tmp4);
-      printf("["); {
+      cell_while(); {
         move(tmp1);
-        printf("+");
+        cell_add(1);
         move(tmp4);
-        printf("-]");
+        cell_sub(1);
+		cell_end();
       }
       move(tmp3);
-      printf("["); {
+      cell_while(); {
         move(tmp2);
         printf("-["); {
           move(ad1);
@@ -298,15 +347,17 @@ void DIV(int ad1, int ad2) {
           move(tmp2);
           printf("[-]]");
         }
-        printf("+");
+        cell_add(1);
         move(tmp3);
-        printf("-]");
+        cell_sub(1);
+		cell_end();
       }
       move(tmp2);
-      printf("-]");
+      cell_sub(1);
+      cell_end();
     }
     move(ad1);
-    printf("+");
+    cell_add(1);
     move(tmp1);
     printf("]");
   }
@@ -377,23 +428,22 @@ void LOAD(int dest, int src) {
   tmp2 = 7;
   move(95);
   position = idx;
-  printf(">>>>>[>>>>>");
-  move(4);
-  printf("");
+  cell_move_r(5);
+  cell_while();
+  cell_move_r(5);
   MOV(9, 4);
   SUB(idx, 4);
   move(idx);
-  printf("]");
+  cell_end();
   ADD(idx, 4);
   MOVE(4, data);
   move(idx);
-  printf("[<<<<<");
+  cell_while();
+  cell_move_l(5);
   ADD(idx, 4);
-  move(4);
-  printf("");
   MOV(4, 9);
   move(5);
-  printf("]");
+  cell_end();
   position = 95;
   tmp1 = oldtmp1;
   tmp2 = oldtmp2;
@@ -419,7 +469,7 @@ void LOAD(int dest, int src) {
   printf("copy target");
   MOV(5, 7);
   move(4);
-  printf("[");
+  cell_while();
   MOV(1, 5);
   move(1);
   printf("#");
@@ -450,21 +500,24 @@ void STORE(int dest, int src)
   tmp2 = 12;
   move(95);
   position = idx;
-  printf(">>>>>[#>>>>>");
+  cell_move_r(5);
+  cell_while();
+  cell_move_r(5);
   MOV(6, 1);
   move(9);
   printf("#");
   MOV(14, 9);
   SUB(idx, 9);
   move(idx);
-  printf("]#");
+  cell_end();
   ADD(idx, 9);
   MOVE(data, 6);
   move(idx);
-  printf("[<<<<<#");
+  cell_while();
+  cell_move_l(5);
   ADD(idx, 4);
   move(idx);
-  printf("#]");
+  cell_end();
   position = 95;
   tmp1 = oldtmp1;
   tmp2 = oldtmp2;
@@ -473,42 +526,47 @@ void STORE(int dest, int src)
 
 void COMP(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(tmp2);
-  printf("[-]");
+  cell_zero();
 
   move(ad1);
-  printf("["); {
+  cell_while(); {
     move(tmp2);
-    printf("+");
+    cell_add(1);
     move(ad1);
-    printf("-]+");
+	cell_sub(1);
+	cell_end();
+	cell_add(1);
   }
 
   move(ad2);
-  printf("["); {
+  cell_while(); {
     move(tmp2);
-    printf("-");
+	cell_sub(1);
     move(tmp1);
-    printf("+");
+    cell_add(1);
     move(ad2);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp1);
-  printf("["); {
+  cell_while(); {
     move(ad2);
-    printf("+");
+    cell_add(1);
     move(tmp1);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp2);
-  printf("["); {
+  cell_while(); {
     move(ad1);
-    printf("-");
+	cell_sub(1);
     move(tmp2);
-    printf("[-]]");
+	cell_zero();
+	cell_end();
   }
   move(ad1);
 
@@ -516,42 +574,46 @@ void COMP(int ad1, int ad2) {
 }
 void CNE(int ad1, int ad2) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(tmp2);
-  printf("[-]");
+  cell_zero();
 
   move(ad1);
-  printf("["); {
+  cell_while(); {
     move(tmp2);
-    printf("+");
+    cell_add(1);
     move(ad1);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(ad2);
-  printf("["); {
+  cell_while(); {
     move(tmp2);
-    printf("-");
+	cell_sub(1);
     move(tmp1);
-    printf("+");
+    cell_add(1);
     move(ad2);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp1);
-  printf("["); {
+  cell_while(); {
     move(ad2);
-    printf("+");
+    cell_add(1);
     move(tmp1);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp2);
-  printf("["); {
+  cell_while(); {
     move(ad1);
-    printf("+");
+    cell_add(1);
     move(tmp2);
-    printf("[-]]");
+	cell_zero();
+	cell_end();
   }
   move(ad1);
 
@@ -560,33 +622,36 @@ void CNE(int ad1, int ad2) {
 
 void BIF(int ad, int jmp) {
   move(tmp1);
-  printf("[-]");
+  cell_zero();
   move(tmp2);
-  printf("[-]");
+  cell_zero();
 
   move(ad);
-  printf("["); {
+  cell_while(); {
     move(tmp1);
-    printf("+");
+    cell_add(1);
     move(tmp2);
-    printf("+");
+    cell_add(1);
     move(ad);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp1);
-  printf("["); {
+  cell_while(); {
     move(ad);
-    printf("+");
+    cell_add(1);
     move(tmp1);
-    printf("-]");
+	cell_sub(1);
+	cell_end();
   }
 
   move(tmp2);
-  printf("["); {
+  cell_while(); {
     JUMP(jmp);
     move(tmp2);
-    printf("[-]]");
+	cell_zero();
+	cell_end();
   }
 
   stackp -= 2;
@@ -595,13 +660,9 @@ void BIF(int ad, int jmp) {
 
 void move(int ad) {
   int num = ad - position;
-  char movc = '>';
-  if(num == 0) return;
-  else if( num < 0) {
-   movc = '<';
-   num *= -1;
-  }
-
-  for(int i=0; i < num; i++) printf("%c", movc);
+  if (num > 0)
+	cell_move_r(num);
+  else
+	cell_move_l(-1*num);
   position = ad;
 }
