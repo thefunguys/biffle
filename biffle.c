@@ -94,6 +94,8 @@ void assemble_op(char* opstr)
   }
   else if (match(opname, "debug"))
 	op_DEBUG(target1);
+  else if (match(opname, "printn"))
+	op_PRINTN(target1);
   else if (match(opname, "load"))
 	op_LOAD(target1, target2);
   else if (match(opname, "store"))
@@ -147,7 +149,7 @@ void assemble_program()
   int idx = 0;
   while ((read = getline(&line, &len, fp)) != -1) {
 	if (read == 1) continue;
-	trimwhitespace(line);
+	line = trimwhitespace(line);
 	if (line[0] == ';') continue;
 	if (line[0] == '.') {
 	  char* lcpy = malloc(len);
@@ -162,16 +164,16 @@ void assemble_program()
   rewind(fp);
   MEM_INIT();
   SET(hlt, 1);
-  printf("[");
+  cell_while();
   while ((read = getline(&line, &len, fp)) != -1) {
 	if (read == 1) continue;
-	trimwhitespace(line);
+	line = trimwhitespace(line);
 	if (line[0] == ';') continue;
 	if (line[0] == '.') continue;
 	assemble_op(line);
   }
   move(hlt);
-  printf("]");
+  cell_end();
 }
 
 char *trimwhitespace(char *str)

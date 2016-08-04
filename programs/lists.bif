@@ -1,0 +1,70 @@
+define(CAR, tmp8)
+jump .start
+
+.alloc
+	mov res CAR
+	addi CAR 2
+	ret
+
+;creates a new node with ein as value and zwei as next, returns address
+.makenode
+	push sc
+	push ein
+	push zwei
+	call .alloc
+	noop
+	mov ein res
+	pop tmp7
+	store tmp7 res
+	pop tmp7
+	inc res
+	store tmp7 res
+	mov res ein
+	pop sc
+	ret
+
+;returns the value of the node at ein
+.nodeval
+	inc ein
+	load res ein
+	dec ein
+	ret
+
+;returns a pointer to the next node from ein
+.nodenext
+	load res ein
+	debug res
+	ret
+
+;prints the list following ein
+.plist
+	push sc
+	.plistloop
+	call .nodeval
+	noop
+	put res
+	call .nodenext
+	noop
+	debug res
+	mov ein res
+	bif ein .plistloop
+	pop sc
+	ret
+
+.star
+set CAR 16
+set ein 'A'
+set zwei 0
+call .makenode
+noop
+mov zwei res
+set ein 'B'
+call .makenode
+noop
+mov zwei res
+set ein 'C'
+call .makenode
+noop
+call .plist
+noop
+hlt

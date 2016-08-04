@@ -1,0 +1,4 @@
+;123
+set ein 123 
+printn ein
+hlt

@@ -22,14 +22,14 @@ void cell_move_r(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	putchar('>');
+	printf(">");
 }
 
 void cell_move_l(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	putchar('<');
+	printf("<");
 }
 
 void cell_while()
@@ -113,7 +113,30 @@ void PUSH(int dest)
   SET(30, 0);
   SET(32, 1);
   move(30);
-  printf("<[->>>[>>]>+<<<[<<]<]>>>[>>]+[<<]");
+  //printf("<[->>>[>>]>+<<<[<<]<]>>>[>>]+[<<]");
+  cell_move_l(1);
+  cell_while();
+  cell_sub(1);
+  cell_move_r(3);
+  cell_while();
+  cell_move_r(2);
+  cell_end();
+  cell_move_r(1);
+  cell_add(1);
+  cell_move_l(3);
+  cell_while();
+  cell_move_l(2);
+  cell_end();
+  cell_move_l(1);
+  cell_end();
+  cell_move_r(3);
+  cell_while();
+  cell_move_r(2);
+  cell_end();
+  cell_add(1);
+  cell_while();
+  cell_move_l(2);
+  cell_end();
   SET(32, 1);
 }
 
@@ -122,7 +145,33 @@ void POP(int dest)
   SET(29, 0);
   SET(32, 1);
   SET(30, 0);
-  printf(">>[>>]<[-<[<<]<+>>>[>>]<]<-<<[<<]");
+  //printf(">>[>>]<[-<[<<]<+>>>[>>]<]<-<<[<<]");
+  cell_move_r(2);
+  cell_while();
+  cell_move_r(2);
+  cell_end();
+  cell_move_l(1);
+  cell_while();
+  cell_sub(1);
+  cell_move_l(1);
+  cell_while();
+  cell_move_l(2);
+  cell_end();
+  cell_move_l(1);
+  cell_add(1);
+  cell_move_r(3);
+  cell_while();
+  cell_move_r(2);
+  cell_end();
+  cell_move_l(1);
+  cell_end();
+  cell_move_l(1);
+  cell_sub(1);
+  cell_move_l(2);
+  cell_while();
+  cell_move_l(2);
+  cell_end();
+  
   SET(32, 1);
   MOV(dest, 29);
 }
@@ -141,51 +190,27 @@ void PRINT(char* str)
 
 void PRINTN(int n)
 {
-  /**
-set ein 123
-;ones
-set 15 0
-;tens
-set 16 0
-;hundreds
-set 17 0
-set 20 10
-.loop
-mov tmp7 15
-comp tmp7 20
-bif tmp7 .inc10s
-jump .end
-.inc10s
-inc 16
-set 15 0
-mov tmp7 16
-comp tmp7 20
-bif tmp7 .inc100s
-jump .end
-.inc100s
-inc 17
-set 16 0
-.end
-dec ein
-inc 15
-bif ein .loop
-mov jcmp 17
-call .pdigit
-noop
-mov jcmp 16
-call .pdigit
-noop
-mov jcmp 15
-call .pdigit
-noop
-hlt
-
-.pdigit
-set res 48
-add res jcmp
-put res
-ret
-  */
+  MOV(tmp5, n);
+  SET(tmp7, 10);
+  SET(tmp8, 0);
+  move(tmp5);
+  cell_while();
+  INC(tmp8);
+  MOV(tmp6, tmp5);
+  MOD(tmp6, tmp7);
+  PUSH(tmp6);
+  DIV(tmp5, tmp7);
+  move(tmp5);
+  cell_end();
+  SET(tmp7, 48);
+  move(tmp8);
+  cell_while();
+  DEC(tmp8);
+  POP(tmp6);
+  ADD(tmp6, tmp7);
+  PUT(tmp6);
+  move(tmp8);
+  cell_end();
 }
 
 void ADD(int ad1, int ad2) {
@@ -219,7 +244,7 @@ void SUB(int ad1, int ad2) {
   move(ad2);
   cell_while();
   move(ad1);
-  printf("-");
+  cell_sub(1);
   move(tmp1);
   cell_add(1);
   move(ad2);
@@ -341,11 +366,13 @@ void DIV(int ad1, int ad2) {
       move(tmp3);
       cell_while(); {
         move(tmp2);
-        printf("-["); {
+		cell_sub(1);
+		cell_while(); {
           move(ad1);
-          printf("-");
+		  cell_sub(1);
           move(tmp2);
-          printf("[-]]");
+		  cell_zero();
+		  cell_end();
         }
         cell_add(1);
         move(tmp3);
@@ -359,7 +386,7 @@ void DIV(int ad1, int ad2) {
     move(ad1);
     cell_add(1);
     move(tmp1);
-    printf("]");
+	cell_end();
   }
 
   stackp -= 4;
@@ -381,10 +408,10 @@ void MOV(int dest, int src)
 }
 
 void MOD(int ad1, int ad2) {
-  MOV(res, ad1); // a
-  DIV(res, tmp2); // a / b
-  MULT(res, tmp2); // (a/b) * b
-  SUB(ad1, res);
+  MOV(tmp5, ad1); // a
+  DIV(tmp5, ad2); // a / b
+  MULT(tmp5, ad2); // (a/b) * b
+  SUB(ad1, tmp5);
   /*
 set ein 76
 set zwei 11
@@ -505,7 +532,7 @@ void STORE(int dest, int src)
   cell_move_r(5);
   MOV(6, 1);
   move(9);
-  printf("#");
+  printf("");
   MOV(14, 9);
   SUB(idx, 9);
   move(idx);

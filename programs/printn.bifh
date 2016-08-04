@@ -1,0 +1,47 @@
+.printn
+;save return point
+push sc
+;ones
+set 25 0
+;tens
+set 26 0
+;hundreds
+set 27 0
+set 20 10
+.loop
+mov tmp7 25
+comp tmp7 20
+bif tmp7 .inc10s
+jump .end
+.inc10s
+inc 26
+set 25 0
+mov tmp7 26
+comp tmp7 20
+bif tmp7 .inc100s
+jump .end
+.inc100s
+inc 27
+set 26 0
+.end
+dec ein
+inc 25
+bif ein .loop
+mov jcmp 27
+call .pdigit
+noop
+mov jcmp 26
+call .pdigit
+noop
+mov jcmp 25
+call .pdigit
+noop
+;restore return point
+pop sc
+ret
+
+.pdigit
+set res 48
+add res jcmp
+put res
+ret

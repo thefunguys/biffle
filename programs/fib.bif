@@ -1,4 +1,7 @@
 ;Y7"
+jump .start
+include(printn.bifh)
+.start
 set ein 1
 set zwei 1
 set tmp8 9

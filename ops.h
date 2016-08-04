@@ -41,6 +41,7 @@ generic_op(SUBI);
 generic_op(LOAD);
 generic_op(STORE);
 single_op(PUSH);
+single_op(PRINTN);
 single_op(POP);
 single_op(PUT);
 single_op(GETC);
@@ -105,14 +106,13 @@ void gen_header()
   ADD(tmp4, pc);
   COMP(tmp3, tmp4);
   move(tmp3);
-  printf("[");
+  cell_while();
 }
 void footer()
 {
-  move(pc);
-  printf("+");
-  move(tmp3);
+  INC(pc);
   SET(tmp3, 0);
-  printf("]\n");
+  cell_end();
+  printf("\n");
 }
 #endif

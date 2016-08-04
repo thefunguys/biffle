@@ -1,15 +1,6 @@
 ;!
 set ein 67
 set zwei 34
-call .mod
-noop
-put res
+mod ein zwei
+put ein
 hlt
-
-.mod
-set res 0
-add res ein
-div ein zwei
-mult ein zwei
-sub res ein
-ret
