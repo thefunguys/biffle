@@ -20,3 +20,4 @@ test: $(EXE)
 
 clean:
 	rm build/*.o
+	rm tests/*.b

@@ -31,4 +31,6 @@ void assemble_op(char* opstr);
 void assemble_program();
 
 char *trimwhitespace(char *str);
+char* get_dir_name(char* file);
+char* get_file_name(char* file);
 #endif

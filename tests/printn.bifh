@@ -1,5 +1,6 @@
-;123
-set ein 123
+.printn
+;save return point
+push sc
 ;ones
 set 25 0
 ;tens
@@ -35,7 +36,9 @@ noop
 mov jcmp 25
 call .pdigit
 noop
-hlt
+;restore return point
+pop sc
+ret
 
 .pdigit
 set res 48

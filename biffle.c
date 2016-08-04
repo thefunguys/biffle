@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "biffle.h"
 #include "hashmap.h"
 #include "ops.h"
@@ -196,10 +197,41 @@ char *trimwhitespace(char *str)
 int main(int argc, char** argv)
 {
   if (argc > 1) {
-	fp = fopen(argv[1], "r");
+	chdir(get_dir_name(argv[1]));
+	fp = fopen(get_file_name(argv[1]), "r");
   } else {
 	fp = stdin;
   }
   label_map = hashmap_new();
   assemble_program();
 }
+
+char* get_dir_name(char* file)
+{
+  char* fcpy = malloc(256);
+  strncpy(fcpy, file, 256);
+  size_t lastc = strlen(fcpy) - 1;
+  while(fcpy[lastc] != '/' && lastc >= 0) {
+	fcpy[lastc] = 0;
+	lastc--;
+  }
+  return fcpy;
+}
+
+char* get_file_name(char* file)
+{
+  char* fcpy = malloc(256);
+  strncpy(fcpy, file, 256);
+  size_t c = 0;
+  size_t slen = strlen(fcpy);
+  char* name = fcpy;
+  while(fcpy[c] != '/') {
+	name++;
+	c++;
+	if (c == slen)
+	  return fcpy;
+  }
+  name++;
+  return name;
+}
+	

@@ -2,7 +2,9 @@
 
 while [ "$1" != "" ]; do
 	FILE=$1
+	cpp "$FILE" build/ex.bif
+	grep -e "^[^#]" build/ex.bif > build/exb.bif
 	OUTFILE=`echo $FILE | sed -e 's/\.bif/\.b/g'`
-	./biffle $FILE > $OUTFILE
+	./biffle build/exb.bif > $OUTFILE
 	shift
 done;
