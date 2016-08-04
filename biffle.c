@@ -89,9 +89,14 @@ void assemble_op(char* opstr)
   else if (match(opname, "subi"))
 	op_SUBI(target1, target2);
   else if (match(opname, "print")) {
-	fprintf(stderr, "\n%s\n", opstr);
 	op_PRINT(opcpy + 6);
   }
+  else if (match(opname, "debug"))
+	op_DEBUG(target1);
+  else if (match(opname, "load"))
+	op_LOAD(target1, target2);
+  else if (match(opname, "store"))
+	op_STORE(target1, target2);
   else if (match(opname, "set"))
 	op_SET(target1, target2);
   else if (match(opname, "mult"))
@@ -108,6 +113,8 @@ void assemble_op(char* opstr)
 	op_COMP(target1, target2);
   else if (match(opname, "bif"))
 	op_BIF(target1, target2);
+  else if (match(opname, "cne"))
+	op_CNE(target1, target2);
   else if (match(opname, "jump"))
 	op_JUMP(target1);
   else if (match(opname, "put"))

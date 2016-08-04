@@ -2,3 +2,5 @@
 a.out
 biffle
 **/*.b
+\#*
+build/*

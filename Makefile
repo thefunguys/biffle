@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -O1
+CFLAGS = -O1
 SOURCES = biffle.c functions.c hashmap.c
 
 

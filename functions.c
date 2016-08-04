@@ -95,7 +95,7 @@ void PRINT(char* str)
 {
   int i = 0;
   size_t len = strlen(str);
-  while(i < strlen(str)) {
+  while(i < len) {
 	SET(tmp5, (int) str[i]);
 	PUT(tmp5);
 	i++;
@@ -349,6 +349,131 @@ put zwei
 void NUM(int num) {
 }
   
+void LOAD(int dest, int src) {
+  move(95);
+  int oldpos = position;
+  int oldtmp1 = tmp1;
+  int oldtmp2 = tmp2;
+  int idx = 5;
+  int data = 8;
+  int memx = 101;
+  int cell_idx = 1;
+  while (memx < 130) {
+	move(memx);
+	if (memx % 5 == 0)
+	  SET(memx, cell_idx++);
+	memx++;
+  }
+  MOV(104, src);
+  MOV(99, src);
+  SET(94, 0);
+  SET(95, 0);
+  SET(100, 1);
+  tmp1 = 6;
+  tmp2 = 7;
+  move(95);
+  position = idx;
+  printf(">>>>>[>>>>>");
+  move(4);
+  printf("");
+  MOV(9, 4);
+  SUB(idx, 4);
+  move(idx);
+  printf("]");
+  ADD(idx, 4);
+  MOVE(4, data);
+  move(idx);
+  printf("[<<<<<");
+  ADD(idx, 4);
+  move(4);
+  printf("");
+  MOV(4, 9);
+  move(5);
+  printf("]");
+  position = 95;
+  tmp1 = oldtmp1;
+  tmp2 = oldtmp2;
+  MOV(dest, 94);
+  /*
+  SET(96, 0);
+  SET(100, 1);
+  SET(104, 2);
+  SET(108, 3);
+  MOV(97, src);
+  SET(98, 1);
+  move(98);
+  tmp1 = 2;
+  tmp2 = 6;
+  position = 6;
+  printf("start load");
+  printf("#[>>>>");
+  MOV(5, 1);
+  CNE(1, 4);
+  MOV(6, 1);
+  move(6);
+  printf("]");
+  printf("copy target");
+  MOV(5, 7);
+  move(4);
+  printf("[");
+  MOV(1, 5);
+  move(1);
+  printf("#");
+  move(4);
+  printf("<<<<]");
+  position = oldpos;
+  tmp1 = oldtmp1;
+  tmp2 = oldtmp2;
+  MOV(dest, 97);
+  */
+}
+
+void STORE(int dest, int src)
+{
+  int idx = 10;
+  int data = 13;
+  int memx = 101;
+  int cell_idx = 1;
+  while (memx < 130) {
+	move(memx);
+	if (memx % 5 == 0)
+	  SET(memx, cell_idx++);
+	memx++;
+  }
+  int oldpos = position;
+  int oldtmp1 = tmp1;
+  int oldtmp2 = tmp2;
+  MOV(104, src);
+  MOV(99, src);
+  MOV(96, dest);
+  MOV(101, dest);
+  SET(94, 0);
+  SET(95, 0);
+  SET(100, 1);
+  tmp1 = 11;
+  tmp2 = 12;
+  move(95);
+  position = idx;
+  printf(">>>>>[#>>>>>");
+  MOV(6, 1);
+  move(9);
+  printf("#");
+  MOV(14, 9);
+  SUB(idx, 9);
+  move(idx);
+  printf("]#");
+  ADD(idx, 9);
+  MOVE(data, 6);
+  move(idx);
+  printf("[<<<<<#");
+  ADD(idx, 4);
+  move(idx);
+  printf("#]");
+  position = 95;
+  tmp1 = oldtmp1;
+  tmp2 = oldtmp2;
+}
+
 
 void COMP(int ad1, int ad2) {
   move(tmp1);
@@ -386,6 +511,49 @@ void COMP(int ad1, int ad2) {
   printf("["); {
     move(ad1);
     printf("-");
+    move(tmp2);
+    printf("[-]]");
+  }
+  move(ad1);
+
+  stackp -= 2;
+}
+void CNE(int ad1, int ad2) {
+  move(tmp1);
+  printf("[-]");
+  move(tmp2);
+  printf("[-]");
+
+  move(ad1);
+  printf("["); {
+    move(tmp2);
+    printf("+");
+    move(ad1);
+    printf("-]");
+  }
+
+  move(ad2);
+  printf("["); {
+    move(tmp2);
+    printf("-");
+    move(tmp1);
+    printf("+");
+    move(ad2);
+    printf("-]");
+  }
+
+  move(tmp1);
+  printf("["); {
+    move(ad2);
+    printf("+");
+    move(tmp1);
+    printf("-]");
+  }
+
+  move(tmp2);
+  printf("["); {
+    move(ad1);
+    printf("+");
     move(tmp2);
     printf("[-]]");
   }

@@ -8,4 +8,13 @@ put zwei
 comp ein zwei
 add zwei ein
 put zwei
+set ein 'A'
+set zwei 'B'
+cne ein zwei
+bif ein .okay
+.end
 hlt
+
+.okay
+print okay
+jump .end

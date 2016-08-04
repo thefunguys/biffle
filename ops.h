@@ -34,9 +34,12 @@ generic_op(SET);
 generic_op(COMP);
 generic_op(BIF);
 generic_op(MOD);
+generic_op(CNE);
 generic_op(MOV);
 generic_op(ADDI);
 generic_op(SUBI);
+generic_op(LOAD);
+generic_op(STORE);
 single_op(PUSH);
 single_op(POP);
 single_op(PUT);
@@ -47,6 +50,14 @@ void op_PRINT(char* str)
 {
   gen_header();
   PRINT(str);
+  footer();
+}
+
+void op_DEBUG(int dest)
+{
+  gen_header();
+  move(dest);
+  printf("#");
   footer();
 }
 

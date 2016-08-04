@@ -1,0 +1,23 @@
+set zwei 1
+set 26 'A'
+store 26 zwei
+set 113 'B'
+inc zwei
+store 26 zwei
+set 118 'C'
+set zwei 1
+load ein zwei
+put ein
+inc zwei
+load ein zwei
+put ein
+inc zwei
+load ein zwei
+put ein
+set 108 's'
+set zwei 1
+load ein zwei
+put ein
+set zwei '!'
+put zwei
+hlt

@@ -1,27 +1,26 @@
 #ifndef BIFFLE_H
 #define BIFFLE_H
 #include <string.h>
+#include <stdio.h>
 #include <ctype.h>
 
-enum registers {
-  zero = 0,
-  hlt,
-  pc,
-  jcmp,
-  res,
-  ein,
-  zwei,
-  sc,
-  sp,
-  tmp1,
-  tmp2,
-  tmp3,
-  tmp4,
-  tmp5,
-  tmp6,
-  tmp7,
-  tmp8
-};
+static int zero = 0;
+static int hlt = 1;
+static int pc = 2;
+static int jcmp = 3;
+static int res = 4;
+static int ein = 5;
+static int zwei = 6;
+static int sc = 7;
+static int sp = 8;
+static int tmp1 = 9;
+static int tmp2 = 10;
+static int tmp3 = 11;
+static int tmp4 = 12;
+static int tmp5 = 13;
+static int tmp6 = 14;
+static int tmp7 = 15;
+static int tmp8 = 16;
 
 typedef enum registers bifreg_t;
 typedef enum ops operation_t;
