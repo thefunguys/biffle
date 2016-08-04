@@ -348,6 +348,18 @@ put zwei
 
 void NUM(int num) {
 }
+
+void MEM_INIT()
+{
+  int memx = 101;
+  int cell_idx = 1;
+  while (memx < HEAP_MAX) {
+	move(memx);
+	if (memx % 5 == 0)
+	  SET(memx, cell_idx++);
+	memx++;
+  }
+}
   
 void LOAD(int dest, int src) {
   move(95);
@@ -356,14 +368,6 @@ void LOAD(int dest, int src) {
   int oldtmp2 = tmp2;
   int idx = 5;
   int data = 8;
-  int memx = 101;
-  int cell_idx = 1;
-  while (memx < 130) {
-	move(memx);
-	if (memx % 5 == 0)
-	  SET(memx, cell_idx++);
-	memx++;
-  }
   MOV(104, src);
   MOV(99, src);
   SET(94, 0);
@@ -432,14 +436,6 @@ void STORE(int dest, int src)
 {
   int idx = 10;
   int data = 13;
-  int memx = 101;
-  int cell_idx = 1;
-  while (memx < 130) {
-	move(memx);
-	if (memx % 5 == 0)
-	  SET(memx, cell_idx++);
-	memx++;
-  }
   int oldpos = position;
   int oldtmp1 = tmp1;
   int oldtmp2 = tmp2;

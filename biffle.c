@@ -159,6 +159,7 @@ void assemble_program()
 	}
   }
   rewind(fp);
+  MEM_INIT();
   SET(hlt, 1);
   printf("[");
   while ((read = getline(&line, &len, fp)) != -1) {

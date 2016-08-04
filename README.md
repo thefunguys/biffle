@@ -10,5 +10,5 @@ WHAT IT HAS
  - a stack
 
 WHAT IT LACKS
- - True random-access memory (to be engineered, dirtily)
  - A higher level language for it (yet)
+ - larger datatypes than byte

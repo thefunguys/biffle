@@ -11,6 +11,7 @@ void COMP(int, int);
 void CNE(int, int);
 void LOAD(int, int);
 void STORE(int, int);
+void MEM_INIT();
 void JUMP(int);
 void BIF(int, int);
 void move(int);

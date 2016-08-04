@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#define HEAP_MAX 256
+
 static int zero = 0;
 static int hlt = 1;
 static int pc = 2;
