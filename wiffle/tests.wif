@@ -1,0 +1,19 @@
+var a;
+var b;
+var[2] c;
+a = 3 * 3 + 4;
+b = &a;
+c = 17;
+printn(a);
+printn(c[0]);
+if $b == 13
+	printn(twice(a));
+
+while a != 0 do
+	printn(a);
+	a = a - 1;
+end
+
+fn twice(n) do
+   n * 2;
+end
