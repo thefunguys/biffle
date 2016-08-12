@@ -162,6 +162,7 @@ void assemble_program()
 	}
   }
   rewind(fp);
+  printf(">>>");
   MEM_INIT();
   SET(hlt, 1);
   cell_while();

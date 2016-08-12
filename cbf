@@ -8,8 +8,10 @@ while [ "$1" != "" ]; do
 	echo "$FILE: "
 	expected=$(head -n 1 `echo $FILE | sed -e 's/\.b/\.bif/'`)
 	expected=$(echo -e "$expected" | sed -e 's/^;//')
-    exe=$(echo `basename $FILE` | sed -e 's/\..*//')
-	output=$($bfi $FILE; ./$exe)
+	if [ $bfi == "bfc" ]; then
+		exe=$(echo `basename $FILE` | sed -e 's/\..*//')
+		output=$($bfi $FILE > /dev/null; ./$exe)
+	fi
 	if [ "$expected" = "$output" ]; then
 		color="\e[92m"
 	else

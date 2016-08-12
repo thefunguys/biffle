@@ -1,11 +1,7 @@
-;099
-jump .start
+;99
 ;m4 things
-include(printn.bifh)
 define(NUM, 99)
 
-.start
 set ein NUM
-call printn
-noop
+printn ein
 hlt

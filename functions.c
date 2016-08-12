@@ -3,6 +3,7 @@
 #include "stdio.h"
 
 #define CELL_SIZE 3
+#define twobytecells 1
 
 static int position= 0;
 int stackp = 0;
@@ -12,15 +13,22 @@ void cell_add(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	printf("+<[-]+ >>>[-] <<[ <- >[>>+<<-]]>>[<<+>>-]<<<[>>+<<-]>#");
-  //printf("+");
+	//printf("+<[-]+ >>>>[-] <<<[ <- >[>>>+<<<-]]>>>[<<<+>>>-]<<<<[>>+<<-]>#");
+	#ifdef twobytecells
+	printf("+[<+>>>+<<-]<[>+<-]+>>>[<<<->>>[-]]<<<[->>+<<]>");
+    #else
+    printf("+");
+	#endif
 }
 void cell_sub(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	printf("-<[-]+ >>>[-] <<[ <- >[>>+<<-]]>>[<<+>>-]<<<[>>-<<-]>#");
-  //printf("-");
+	#ifdef twobytecells
+	printf("[<+>>>+<<-]<[>+<-]+>>>[<<<->>>[-]]<<<[->>-<<]>-");
+    #else
+	printf("-");
+	#endif
 }
 
 void cell_move_r(int n)
@@ -41,17 +49,26 @@ void cell_move_l(int n)
 
 void cell_while()
 {
-  putchar('[');
+  //printf("[");
+  #ifdef twobytecells
+  printf("[>>+>>>+<<<<<-]>>>>>[<<<<<+>>>>>-]<<<[[-]<<<+>>>]<[>+>>>+<<<<-]>>>>[<<<<+>>>>-]<<<[[-]<<<+>>>]<<<[[-]>");
+  #else
+  printf("[");
+  #endif
 }
 
 void cell_end()
 {
-  putchar(']');
+  #ifdef twobytecells
+  printf("[>>+>>>+<<<<<-]>>>>>[<<<<<+>>>>>-]<<<[[-]<<<+>>>]<[>+>>>+<<<<-]>>>>[<<<<+>>>>-]<<<[[-]<<<+>>>]<<<]>");
+  #else
+  printf("]");
+  #endif
 }
 
 void cell_zero()
 {
-  printf("[-]");
+  printf("[-]>[-]<");
 }
 
 void MOVE(int ad1, int ad2) {
@@ -353,7 +370,9 @@ void DIV(int ad1, int ad2) {
       move(tmp3);
       cell_add(1);
       move(tmp1);
-      printf("-["); {
+	  cell_sub(1);
+	  cell_while();
+	  {
         move(tmp3);
         cell_zero();
         move(tmp4);

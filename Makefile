@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O1
+CFLAGS = -O3 -Dtwobytecells
 SOURCES = biffle.c functions.c hashmap.c
 
 

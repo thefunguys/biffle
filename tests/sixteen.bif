@@ -1,0 +1,4 @@
+;297
+set ein 297
+printn ein
+hlt
