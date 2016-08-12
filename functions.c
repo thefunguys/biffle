@@ -2,34 +2,41 @@
 #include "biffle.h"
 #include "stdio.h"
 
+#define CELL_SIZE 3
+
 static int position= 0;
 int stackp = 0;
+
 
 void cell_add(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	putchar('+');
+	printf("+<[-]+ >>>[-] <<[ <- >[>>+<<-]]>>[<<+>>-]<<<[>>+<<-]>#");
+  //printf("+");
 }
 void cell_sub(int n)
 {
   int i;
   for (i = 0; i < n; ++i)
-	putchar('-');
+	printf("-<[-]+ >>>[-] <<[ <- >[>>+<<-]]>>[<<+>>-]<<<[>>-<<-]>#");
+  //printf("-");
 }
 
 void cell_move_r(int n)
 {
-  int i;
+  int i, j;
   for (i = 0; i < n; ++i)
-	printf(">");
+	for (j = 0; j < CELL_SIZE; ++j)
+	  putchar('>');
 }
 
 void cell_move_l(int n)
 {
-  int i;
+  int i, j;
   for (i = 0; i < n; ++i)
-	printf("<");
+	for (j = 0; j < CELL_SIZE; ++j)
+	  putchar('<');
 }
 
 void cell_while()

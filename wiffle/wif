@@ -4,6 +4,7 @@ while [ "$1" != "" ]; do
 	python lexer.py $1 > ../build/w.bif
 	cd ..
 	./bif build/w.bif
-	langy build/w.b
+	bfc build/w.b
+	./w
 	shift
 done;
